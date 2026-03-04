@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connor Storrie — SNL Countdown</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="vignette"></div>
+
+
+  <main class="wrap">
+
+    <section class="scoreboard">
+
+      <div class="sb-header">
+        <div class="sb-small">CONNOR STORRIE — SNL</div>
+        <div class="sb-status" id="statusText"></div>
+      </div>
+
+      <!-- COUNTDOWN ROW -->
+      <div class="sb-row">
+        <div class="sb-box">
+          <div class="sb-box-title">HOME</div>
+          <div class="sb-box-subtitle">DAYS</div>
+          <div class="sb-box-digits led-sm" id="days">00</div>
+        </div>
+
+        <div class="sb-box">
+          <div class="sb-box-title">PERIOD</div>
+          <div class="sb-box-subtitle">MIN</div>
+          <div class="sb-box-digits led-sm" id="minutes">00</div>
+        </div>
+
+        <div class="sb-box">
+          <div class="sb-box-title">GUEST</div>
+          <div class="sb-box-subtitle">HRS</div>
+          <div class="sb-box-digits led-sm" id="hours">00</div>
+        </div>
+
+        <div class="sb-box">
+          <div class="sb-box-title">SEC</div>
+          <div class="sb-box-subtitle">SECONDS</div>
+          <div class="sb-box-digits led-sm" id="seconds">00</div>
+        </div>
+      </div>
+
+      <div class="sb-bottom">
+        <div class="sb-ticker" id="tickerText">
+          🏒 COUNTDOWN MODE: mark your calendar • tell your group chat • prepare the fit
+        </div>
+
+        <div class="sb-controls">
+          <button class="btn" id="toggleAudio" type="button">▶︎ PLAY</button>
+          <button class="btn ghost" id="shareBtn" type="button">COPY LINK</button>
+          <button class="btn ghost" id="calendarBtn" type="button">ADD TO CALENDAR</button>
+        </div>
+      </div>
+
+      <div class="sb-fineprint">
+        Coming to a cottage near you <br>Feb 28, 2026 • 11:30 PM EST
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      Times shown for EST
+    </footer>
+
+    <!-- AUDIO -->
+        <audio id="anthem" preload="auto" loop playsinline muted>
+          <source
+            src="https://www.dropbox.com/scl/fi/nskfucadhgxn157jmdemd/cottage.mp3?rlkey=vt6n7tt3e2dh9t2u3l8s4haz4&raw=1"
+            type="audio/mpeg"
+          />
+        </audio>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

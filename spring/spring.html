@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown to Spring 2026</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fcefee, #e8f5e9);
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      font-weight: 600;
+      font-size: 2rem;
+      color: #3a5a40;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: white;
+      padding: 1.5rem 1.25rem;
+      border-radius: 16px;
+      min-width: 100px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .time-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #588157;
+    }
+
+    .time-box label {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6c757d;
+    }
+
+    .spring-message {
+      font-size: 2rem;
+      color: #3a5a40;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .time-box {
+        min-width: 80px;
+        padding: 1rem;
+      }
+
+      .time-box span {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🌷 Countdown to Spring 2026🌷</h1>
+
+    <div class="countdown" id="countdown">
+      <div class="time-box">
+        <span id="days">00</span>
+        <label>Days</label>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <label>Hours</label>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <label>Minutes</label>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <label>Seconds</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const springDate = new Date("March 20, 2026 00:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = springDate - now;
+
+      if (distance <= 0) {
+        countdownEl.innerHTML = 
+          '<div class="spring-message">🌸 Spring is here! 🌸</div>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>

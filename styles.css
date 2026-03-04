@@ -1,0 +1,59 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Cutive Mono", monospace;
+  }
+  
+  /* Put the stars on the whole page */
+  body {
+    min-height: 100vh;
+    background-image: url("assets/aw-space.gif");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: 200px 200px;
+  }
+  
+  /* Center your link stack */
+  .container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    box-sizing: border-box;
+  }
+  
+  .container__link-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .container__link-container div {
+    width: 100%;
+    background: #fff;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+  }
+  
+  .container__link-container a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+
+
+/* Desktops */
+@media (min-width: 600px) {
+    .container__link-container div {
+        max-width: 600px;
+      }
+}
