@@ -14,37 +14,45 @@
     }
 
     body {
-      height: 100vh;
+      /* mobile-safe viewport height */
+      min-height: 100vh;
+      min-height: 100dvh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      padding: 24px; /* prevents edge-to-edge squish */
       background: linear-gradient(135deg, #fcefee, #e8f5e9);
     }
 
     .container {
+      width: 100%;
+      max-width: 720px;
       text-align: center;
-      padding: 2rem;
+      padding: clamp(16px, 4vw, 32px);
     }
 
     h1 {
-      margin-bottom: 2rem;
-      font-weight: 600;
-      font-size: 2rem;
+      margin-bottom: clamp(16px, 4vw, 28px);
+      font-weight: 650;
+      font-size: clamp(1rem, 4.5vw, 2rem);
       color: #3a5a40;
+      line-height: 1.15;
     }
 
     .countdown {
       display: flex;
-      gap: 1.5rem;
       justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     .time-box {
       background: white;
-      padding: 1.5rem 1.25rem;
+      padding: 18px 16px;
       border-radius: 16px;
-      min-width: 100px;
+      min-width: 120px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s ease;
     }
@@ -55,33 +63,50 @@
 
     .time-box span {
       display: block;
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: clamp(1.9rem, 6vw, 2.6rem);
+      font-weight: 750;
       color: #588157;
+      line-height: 1;
     }
 
     .time-box label {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.09em;
       color: #6c757d;
     }
 
     .spring-message {
-      font-size: 2rem;
+      font-size: clamp(1.4rem, 5vw, 2rem);
       color: #3a5a40;
-      font-weight: 600;
+      font-weight: 650;
     }
 
-    @media (max-width: 600px) {
-      .time-box {
-        min-width: 80px;
-        padding: 1rem;
+    /* Mobile layout: clean 2x2 grid */
+    @media (max-width: 520px) {
+      body {
+        padding: 16px;
       }
 
-      .time-box span {
-        font-size: 2rem;
+      .countdown {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+
+      .time-box {
+        min-width: 0;            /* allow grid to control width */
+        padding: 14px 12px;
+        border-radius: 14px;
+      }
+
+      .time-box label {
+        margin-top: 8px;
+        font-size: 0.72rem;
       }
     }
   </style>
@@ -89,7 +114,7 @@
 
 <body>
   <div class="container">
-    <h1>🌷 Countdown to Spring 2026🌷</h1>
+    <h1>🌷 Countdown to Spring 2026 🌷</h1>
 
     <div class="countdown" id="countdown">
       <div class="time-box">
@@ -115,33 +140,32 @@
     const springDate = new Date("March 20, 2026 00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
+    function pad2(n) {
+      return String(n).padStart(2, "0");
+    }
+
     function updateCountdown() {
-      const now = new Date().getTime();
+      const now = Date.now();
       const distance = springDate - now;
 
       if (distance <= 0) {
-        countdownEl.innerHTML = 
-          '<div class="spring-message">🌸 Spring is here! 🌸</div>';
+        countdownEl.innerHTML = '<div class="spring-message">🌸 Spring is here! 🌸</div>';
         return;
       }
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60)
-      );
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+      document.getElementById("days").textContent = days;      // days can be big
+      document.getElementById("hours").textContent = pad2(hours);
+      document.getElementById("minutes").textContent = pad2(minutes);
+      document.getElementById("seconds").textContent = pad2(seconds);
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
